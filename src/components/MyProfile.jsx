@@ -8,8 +8,10 @@ function MyProfile() {
       <Card.Body>
         <Card.Title>Card Title</Card.Title>
         <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+          My roots are in Ecuador, but having lived on both the East and West
+          coasts of the US and Canada, I've gotten to explore a mix of perspectives.
+          I love using that experience to connect with people, collaborate, and
+          share stories through the digital world.
         </Card.Text>
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>

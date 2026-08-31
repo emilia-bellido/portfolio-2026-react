@@ -57,3 +57,10 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--highlight);
   color: #FFFFFF;
 }
+
+.card-image {
+  width: 100%;          /* Fills the width of its parent container */
+  height: 250px;        /* Forces all images to be exactly 250px tall */
+  object-fit: cover;    /* Crops the image to fit without stretching */
+  object-position: center; /* Centers the crop area */
+}

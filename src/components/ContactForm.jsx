@@ -20,7 +20,7 @@ export default function ContactForm() {
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form className="m-5 my-3" onSubmit={onSubmit}>
       <Form.Control name="botcheck" type="checkbox" style={{ display: 'none' }}/>
       <Form.Group className="mb-3" controlId="formName">
         <Form.Label>Name</Form.Label>
