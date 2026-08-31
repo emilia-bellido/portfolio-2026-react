@@ -1,11 +1,10 @@
 import Card from 'react-bootstrap/Card';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ProjectCard = ({id, title, image}) => {
     return (
         //Makes the Card clickable : if its the hotel-dashboard, the link will redirect to the pages project
-       // <Link to={`/projects/${id}`}>
-       <>
+       <Link to={`/project/${id}`}>
             <Card>
                 <Card.Img variant="top" src= {image} />
                 <Card.Body>
@@ -14,8 +13,7 @@ const ProjectCard = ({id, title, image}) => {
                 </Card.Text>
                 </Card.Body>
             </Card>
-        </>
-       // </Link>
+        </Link>
     )
 }
 
