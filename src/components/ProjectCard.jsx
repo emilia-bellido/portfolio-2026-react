@@ -6,7 +6,7 @@ const ProjectCard = ({id, title, image}) => {
         //Makes the Card clickable : if its the hotel-dashboard, the link will redirect to the pages project
        <Link to={`/project/${id}`}>
             <Card>
-                <Card.Img variant="top" src= {image} />
+                <Card.Img className="card-image" variant="top" src= {image} />
                 <Card.Body>
                 <Card.Text>
                    {title}

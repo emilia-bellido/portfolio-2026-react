@@ -28,7 +28,21 @@ export const ProjectProvider = ({children}) => {
                 const formattedData = data.records.map((project) => ({
                     id: project.fields["Project ID"],
                     title: project.fields["Title"],
-                    image: project.fields["Main Image"]?.[0]?.url
+                    image: project.fields["Main Image"]?.[0]?.url,
+                    category: project.fields["Category"],
+                    featured: project.fields["Feature"],
+                    description: project.fields["Description"],
+                    problem: project.fields["The Problem"],
+                    solution: project.fields["The Solution"],
+                    link: project.fields["Link"],
+                    git: project.fields["Repository"],
+                    design: project.fields["Design & Creative Tools"],
+                    programming: project.fields["Programming & Scripting"],
+                    databases: project.fields["Databses & CMS"],
+                    systems: project.fields["Systems, Hardware & Version Control"],
+                    gallery: project.fields["Gallery"] || [],
+
+
                 }));
 
                 setMyProjects(formattedData);

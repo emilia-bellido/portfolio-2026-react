@@ -29,8 +29,13 @@ const ProjectSwiper = () => {
         spaceBetween={8}
         speed={200}
         grabCursor={true}
-        loop={true}
+       // loop={true}
+              // 1. Force Swiper to allow clicks on links
+        preventClicks={false}
+        preventClicksPropagation={false}
         
+        // 2. Turn loop OFF for now (cloned slides break React Router links)
+        loop={false}
         coverflowEffect={{
           rotate: 5,
           modifier: 2,
