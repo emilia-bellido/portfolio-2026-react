@@ -6,10 +6,9 @@ import { useContext } from 'react';
 
 const Hero = () => {
   return (
-    <Container fluid className="px-0 mb-5">
+    <Container className="px-0 mb-5 text-center">
       <h1 className="fw-bold mb-3">Hi, I'm Emilia.</h1>
-      
-      <p className="fs-5 mb-4" style={{ lineHeight: '1.6', maxWidth: '600px' }}>
+      <p className="fs-5 mb-4 text-center">
         I blend technical logic with digital storytelling to help purpose-driven organizations share their true vision.
       </p>
 

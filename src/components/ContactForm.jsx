@@ -20,24 +20,33 @@ export default function ContactForm() {
   };
 
   return (
-    <Form className="m-5 my-3"    onSubmit={onSubmit}>
+    <Form id="contact-form" className="m-5 my-3"    onSubmit={onSubmit}>
       <Form.Control name="botcheck" type="checkbox" style={{ display: 'none' }}/>
-      <Form.Group className="mb-3" controlId="formName">
-        <Form.Label>Name</Form.Label>
-        <Form.Control name="name" type="text" placeholder="Enter your Name" />
-      </Form.Group>
+      <div className="row">
+
+        <div className="col-md-6">
+          <Form.Group className="mb-3" controlId="formName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control name="name" type="text" placeholder="Enter your Name" />
+          </Form.Group>
+        </div>
+
+        <div className="col-md-6">
+           <Form.Group className="mb-3" controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control name="email" type="email" placeholder="Enter your Email" />
+          </Form.Group>
+        </div>
+      </div>
       
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control name="email" type="email" placeholder="Enter your Email" />
-      </Form.Group>
+     
 
       <Form.Group className="mb-3" controlId="formText">
         <Form.Label>Message</Form.Label>
         <Form.Control name="message" as="textarea" 
       rows={4} placeholder="Message" />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="outline-light" className="rounded-pill px-4 py-2 fw-medium" type="submit">
         Submit
       </Button>
       <p>{result}</p>
