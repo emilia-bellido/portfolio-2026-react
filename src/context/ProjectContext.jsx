@@ -3,16 +3,24 @@ import { useState, useEffect, createContext } from 'react';
 export const ProjectContext = createContext();
 
 export const ProjectProvider = ({children}) => {
-    //setting myProjects array empty. useState will update once API call happens
-
     
-    const[myProjects, setMyProjects] = useState([]);
+    const [myProjects, setMyProjects] = useState([]);
 
-     //const [isLoading, setIsLoading] - useState(true);
     useEffect(() => {
         const getProjects = async () => {
            
-            try{
+            try {
+                // 1. Check if we already have the data saved in the browser
+                const cachedData = localStorage.getItem('cached_portfolio_projects');
+                
+                if (cachedData) {
+                    // If we do, parse it, set it, and STOP the function. No API call!
+                    setMyProjects(JSON.parse(cachedData));
+                    console.log("Loaded projects from local cache! API bypassed.");
+                    return; 
+                }
+
+                // 2. If no cache exists, do the normal API call
                 const baseId = import.meta.env.VITE_AIRTABLE_BASE_ID;
                 const url = `https://api.airtable.com/v0/${baseId}/Projects`;
 
@@ -23,7 +31,7 @@ export const ProjectProvider = ({children}) => {
                 });
 
                 const data = await response.json();
-                console.log(data);
+                console.log("Fetched fresh from Airtable:", data);
 
                 const formattedData = data.records.map((project) => ({
                     id: project.fields["Project ID"],
@@ -32,8 +40,8 @@ export const ProjectProvider = ({children}) => {
                     category: project.fields["Category"],
                     featured: project.fields["Feature"],
                     description: project.fields["Description"],
-                    problem: project.fields["The Problem"],
-                    solution: project.fields["The Solution"],
+                    goal: project.fields["Goal"],
+                    features: project.fields["Key Features"],
                     link: project.fields["Link"],
                     git: project.fields["Repository"],
                     design: project.fields["Design & Creative Tools"],
@@ -41,10 +49,11 @@ export const ProjectProvider = ({children}) => {
                     databases: project.fields["Databses & CMS"],
                     systems: project.fields["Systems, Hardware & Version Control"],
                     gallery: project.fields["Gallery"] || [],
-
-
                 }));
 
+                // 3. Save the newly formatted data to the browser for next time
+                localStorage.setItem('cached_portfolio_projects', JSON.stringify(formattedData));
+                
                 setMyProjects(formattedData);
                 
             }
@@ -53,16 +62,15 @@ export const ProjectProvider = ({children}) => {
             };
         };
 
-    getProjects();
+        getProjects();
 
-  }, []);
+    }, []);
 
     return (
-            <ProjectContext.Provider value={{ myProjects }}>
-                {children}
-            </ProjectContext.Provider>
-        );
-
+        <ProjectContext.Provider value={{ myProjects }}>
+            {children}
+        </ProjectContext.Provider>
+    );
 };
 
 export default ProjectContext;
