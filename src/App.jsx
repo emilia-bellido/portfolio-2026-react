@@ -11,6 +11,7 @@ import Hero from './components/Hero';
 import ContactForm from './components/ContactForm';
 import ProjectCard from './components/ProjectCard';
 import AllWorkSection from './components/AllWorkSection';
+import Footer from './components/Footer';
 
 
 
@@ -18,7 +19,10 @@ function App() {
   
   return (
     <>
-      <NavBar />
+    
+        <NavBar className="container"/>
+   
+      
 
       <section className = "container" id="about">
          <Hero />
@@ -28,7 +32,13 @@ function App() {
         <AllWorkSection />
       </section>
 
+      <section id="contact" className="container col-md-8">
+      <h5 className="text-center">Let's Work Together!</h5>
+
       <ContactForm />
+      </section> 
+      <Footer />
+      
       
     
     </>

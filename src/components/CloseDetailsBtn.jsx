@@ -7,7 +7,7 @@ function CloseDetailsBtn() {
   return (
     <CloseButton 
       onClick={() => navigate('/')} // 3. Trigger the route change on click
-      aria-label="Close project details"
+      aria-label="Close project details" className="close-btn"
     />
   );
 }

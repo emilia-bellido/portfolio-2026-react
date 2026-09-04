@@ -13,10 +13,12 @@ body {
   background-color: var(--bg-main);
   background-image: url("assets/hero.jpg");
   background-repeat: no-repeat;
+    object-position: center; /* Centers the crop area */
   color: white;
   font-family: "Host Grotesk", sans-serif;
   margin: 0;
   padding: 20px;
+  transition: all 0.3s ease-in-out;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -32,6 +34,13 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
   border-radius: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.glass-card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  border-color: var(--highlight);   
 }
 
 /* Button & Utility Classes */
@@ -62,7 +71,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .card-image {
   width: 100%;          /* Fills the width of its parent container */
-  height: 250px;        /* Forces all images to be exactly 250px tall */
   object-fit: cover;    /* Crops the image to fit without stretching */
   object-position: center; /* Centers the crop area */
+  max-height: 400px;
+  min-height: 382px;
+}
+
+.card-title{
+  color:white;
+  text-align: center;
 }

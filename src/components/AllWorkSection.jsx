@@ -19,8 +19,8 @@ const AllWorkSection = () => {
 
     
   return(
-    <section id="projects">
-      <p className="fw-medium mb-3">What would you like to see?</p>
+    <div id="projects">
+      <p className="fw-medium fs-5 mb-3">What would you like to see?</p>
 
       <div className="d-flex flex-wrap gap-2">
         <Button onClick={categoriesBtn} variant="dark" className="rounded-pill px-4 py-2 fw-medium">
@@ -47,7 +47,7 @@ const AllWorkSection = () => {
             />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

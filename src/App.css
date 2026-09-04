@@ -1,5 +1,5 @@
 #nav-style{
-  background-color: rgba(251, 192, 255, 0.131);
+  background-color: rgb(255 255 255 / 50%);
   color: white;
   padding: 20px;
   margin: 20px;
@@ -10,3 +10,45 @@
   color: white !important;
 }
 
+#contact-form input{
+    background-color: #ffffff00 !important;
+    backdrop-filter: blur(6px);
+    border: 0px;
+    border-bottom: 4px solid var(--border-color);
+    color: white;
+}
+
+#contact-form input:focus{
+  border-color:none;
+  box-shadow: none;
+  outline: 0 none;
+}
+
+#contact-form input::placeholder{
+ color: white;
+}
+
+#contact-form  textarea::placeholder{
+ color: white;
+}
+#contact-form textarea{
+
+   background-color: #ffffff00 !important;
+    backdrop-filter: blur(6px);
+    border: 0px;
+    border-bottom: 4px solid var(--border-color);
+    color: white;
+}
+
+
+
+/*Icons on Footer*/
+
+.icon-footer{
+  color: white;
+}
+
+/*Close Button on project*/
+.close-btn{
+  background-color: white;
+}
