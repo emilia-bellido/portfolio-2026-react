@@ -1,6 +1,6 @@
 :root {
-  --bg-main: #F7F5F0;
-  --card-surface: rgba(255, 255, 255, 0.65);
+  --bg-main: #86764c;
+  --transparent: rgba(255, 255, 255, 0.472);
   --accent: #FF5E6C;
   --highlight: #8BA896;
   --text-primary: #2C3E35;
@@ -11,15 +11,17 @@
 
 body {
   background-color: var(--bg-main);
-  color: var(--text-primary);
+  background-image: url("assets/hero.jpg");
+  background-repeat: no-repeat;
+  color: white;
   font-family: "Host Grotesk", sans-serif;
   margin: 0;
-  padding: 0;
+  padding: 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Merriweather Sans", sans-serif;
-  color: var(--text-primary);
+  color: white;
   font-weight: 700;
 }
 

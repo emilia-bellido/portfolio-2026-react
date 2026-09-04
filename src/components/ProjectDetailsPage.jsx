@@ -112,12 +112,12 @@ const ProjectDetailsPage = () => {
 
             <div className="d-flex justify-content-around">
                 <div>
-                    <h2>Problem</h2>
-                     <p> {selectedProject.problem}</p>
+                    <h2>Goal</h2>
+                     <p> {selectedProject.goal}</p>
                 </div>
                 <div>
-                    <h2>Solution</h2>
-                     <p> {selectedProject.solution}</p>
+                    <h2>Key Features</h2>
+                     <p> {selectedProject.features}</p>
                 </div>
             
             
