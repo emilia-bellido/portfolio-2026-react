@@ -10,7 +10,7 @@ export const ProjectProvider = ({children}) => {
         const getProjects = async () => {
            
             try {
-               const response = await fetch('/api/projects');
+               const response = await fetch('/api/project.js');
                 const data = await response.json();
                 console.log("Fetched fresh from Airtable:", data);
 
