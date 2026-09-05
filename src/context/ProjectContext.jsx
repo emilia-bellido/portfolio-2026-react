@@ -38,7 +38,7 @@ export const ProjectProvider = ({children}) => {
                     title: project.fields["Title"],
                     image: project.fields["Main Image"]?.[0]?.url,
                     category: project.fields["Category"],
-                    featured: project.fields["Feature"],
+                    featured: project.fields["Featured"],
                     description: project.fields["Description"],
                     goal: project.fields["Goal"],
                     features: project.fields["Key Features"],
@@ -46,15 +46,18 @@ export const ProjectProvider = ({children}) => {
                     git: project.fields["Repository"],
                     design: project.fields["Design & Creative Tools"],
                     programming: project.fields["Programming & Scripting"],
-                    databases: project.fields["Databses & CMS"],
+                    databases: project.fields["Databses & Content Systems"],
                     systems: project.fields["Systems, Hardware & Version Control"],
                     gallery: project.fields["Gallery"] || [],
                 }));
 
+                const selectedProjects = formattedData.filter(project => project.featured === true);
+
+
                 // 3. Save the newly formatted data to the browser for next time
-                localStorage.setItem('cached_portfolio_projects', JSON.stringify(formattedData));
+                localStorage.setItem('cached_portfolio_projects', JSON.stringify(selectedProjects));
                 
-                setMyProjects(formattedData);
+                setMyProjects(selectedProjects);
                 
             }
             catch(error){

@@ -2,6 +2,9 @@ import { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button'; 
 import { ProjectContext } from '../context/ProjectContext';
 import ProjectCard from './ProjectCard';
+import Spinner from 'react-bootstrap/Spinner';
+import CardGroup from 'react-bootstrap/CardGroup';
+
 
 const AllWorkSection = () => {
    const { myProjects } = useContext(ProjectContext);
@@ -17,6 +20,15 @@ const AllWorkSection = () => {
     // 2. Filter the projects on the fly
     const categorizedProjects = myProjects.filter((project) => project.category === activeCategory);
 
+    // If Airtable is still fetching, show this sleek centered loading spinner
+    if (!myProjects || myProjects.length === 0) {
+        return (
+            <div className="d-flex flex-column justify-content-center align-items-center w-100" style={{ minHeight: '50vh' }}>
+                <Spinner animation="border" style={{ color: 'var(--text-muted)' }} />
+                <p className="text-white mt-3 fw-bold tracking-wide">Loading Projects...</p>
+            </div>
+        );
+    }
     
   return(
     <div id="projects">
@@ -37,7 +49,7 @@ const AllWorkSection = () => {
         </Button>
       </div>
 
-      <div className="container d-flex flex-wrap mt-4 gap-3">
+      <CardGroup className="container d-flex flex-wrap mt-4 gap-3 mb-4">
         {categorizedProjects.map((project) => (
             <ProjectCard 
                 key={project.id}
@@ -46,7 +58,7 @@ const AllWorkSection = () => {
                 image={project.image}
             />
         ))}
-      </div>
+      </CardGroup>
     </div>
   );
 };

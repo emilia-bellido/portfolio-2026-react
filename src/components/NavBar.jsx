@@ -13,7 +13,7 @@ const NavBar = () => {
                 <Nav className="mx-auto">
                     <Nav.Link href="#all-works">Projects</Nav.Link>
                     <Nav.Link href="#contact">Contact</Nav.Link>
-                    <Nav.Link href="#contact"> <i id="icon-nav" className="bi bi-download pe-2"></i>Resume</Nav.Link> 
+                    <Nav.Link href="../public/resume.pdf"> <i id="icon-nav" className="bi bi-download pe-2"></i>Resume</Nav.Link> 
                 </Nav>
                 </Navbar.Collapse>
             </Container>
