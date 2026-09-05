@@ -12,8 +12,11 @@
 body {
   background-color: var(--bg-main);
   background-image: url("assets/hero.jpg");
+
+  background-size: cover;        /* Forces image to cover the entire screen */
+  background-position: center;   /* Centers the image properly */
+  background-attachment: fixed;  /* Locks the image so it doesn't scroll away */
   background-repeat: no-repeat;
-    object-position: center; /* Centers the crop area */
   color: white;
   font-family: "Host Grotesk", sans-serif;
   margin: 0;
@@ -27,7 +30,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* Glassmorphism Card Style */
+
 .glass-card {
   background: var(--card-surface);
   backdrop-filter: blur(14px);
@@ -37,11 +40,52 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s ease-in-out;
 }
 
+
 .glass-card:hover{
   transform: translateY(-8px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
   border-color: var(--highlight);   
 }
+
+
+/* The protective container that standardizes the shape */
+.image-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Forces the frame to be a perfect square */
+  background-color: rgba(0, 0, 0, 0.15); /* Gives a dark matte background for uncropped images */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-project-card{
+  max-width: 300px;
+  min-height: 200px;
+}
+
+/* The actual image */
+.custom-project-card .card-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Prevents cropping, fits the image inside the square */
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* The image zoom effect still works! */
+.custom-project-card:hover .card-image {
+  transform: scale(1.08);
+}
+/* Make sure the image zoom doesn't break out of the frame */
+.custom-project-card:hover .card-image {
+  transform: scale(1.08);
+}
+
+.card-title{
+  color:white;
+  text-align: center;
+  font-size: 1.15rem !important; 
+}
+
 
 /* Button & Utility Classes */
 .btn-accent {
@@ -67,17 +111,4 @@ h1, h2, h3, h4, h5, h6 {
 .badge-highlight {
   background-color: var(--highlight);
   color: #FFFFFF;
-}
-
-.card-image {
-  width: 100%;          /* Fills the width of its parent container */
-  object-fit: cover;    /* Crops the image to fit without stretching */
-  object-position: center; /* Centers the crop area */
-  max-height: 400px;
-  min-height: 382px;
-}
-
-.card-title{
-  color:white;
-  text-align: center;
 }

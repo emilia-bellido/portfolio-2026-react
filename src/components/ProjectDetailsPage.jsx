@@ -1,12 +1,17 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useParams } from "react-router"; 
 import Carousel from 'react-bootstrap/Carousel'; 
 import { ProjectContext } from '../context/ProjectContext';
 import CloseDetailsBtn from './CloseDetailsBtn';
+import ReactMarkdown from 'react-markdown';
 
 const ProjectDetailsPage = () => {
     const { myProjects } = useContext(ProjectContext);
     const { projectId } = useParams();
+    
+    // NEW: State to track which image is currently clicked/open
+    const [lightboxImage, setLightboxImage] = useState(null);
+
     const selectedProject = myProjects.find((project) => project.id === projectId);
 
     if (!selectedProject) {
@@ -30,93 +35,150 @@ const ProjectDetailsPage = () => {
         );
     };
 
+    const hasTools = (selectedProject.design && selectedProject.design.length > 0) || 
+                     (selectedProject.programming && selectedProject.programming.length > 0) || 
+                     (selectedProject.databases && selectedProject.databases.length > 0) || 
+                     (selectedProject.systems && selectedProject.systems.length > 0);
+
     return(
-        <div className="container py-5 text-white">
-            <div className="mb-4">
-                <CloseDetailsBtn />
-            </div>
-
-            {/* HEADER SECTION */}
-            <div className="mb-5">
-                <h1 className="display-4 fw-bold mb-3">{selectedProject.title}</h1>
-                <p className="lead opacity-75 w-75">{selectedProject.description}</p>
-                
-                {/* Converted plain <a> tags into proper UI buttons */}
-                {(selectedProject.link || selectedProject.git) && (
-                    <div className="d-flex gap-3 mt-4">
-                        {selectedProject.link && (
-                            <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="btn btn-accent rounded-pill px-4">
-                                Watch Video / Visit Site
-                            </a>
-                        )}
-                        {selectedProject.git && (
-                            <a href={selectedProject.git} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light rounded-pill px-4">
-                                View Repository
-                            </a>
-                        )}            
-                    </div> 
-                )}
-            </div>
-
-            {/* THE SLIDESHOW */}
-            {selectedProject.gallery && selectedProject.gallery.length > 0 && (
-                <Carousel className="mb-5 shadow-lg rounded-4 overflow-hidden glass-card border-0">
-                    {selectedProject.gallery.map((image, index) => (
-                        <Carousel.Item key={image.id || index}>
-                            <img
-                                className="d-block w-100"
-                                src={image.url}
-                                alt={`Slide ${index}`}
-                                loading="lazy"
-                                style={{ height: '500px', objectFit: 'cover' }} 
-                            />
-                        </Carousel.Item>
-                    ))}
-                </Carousel>
+        <>
+            {/* NEW: THE LIGHTBOX OVERLAY */}
+            {/* If an image is clicked, this fullscreen div appears. Clicking it sets state back to null (closes it) */}
+            {lightboxImage && (
+                <div 
+                    onClick={() => setLightboxImage(null)}
+                    style={{
+                        position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        zIndex: 9999, // Ensures it sits on top of everything, including navbars
+                        display: 'flex', justifyContent: 'center', alignItems: 'center',
+                        cursor: 'zoom-out' // Shows a minus magnifying glass to indicate clicking closes it
+                    }}
+                >
+                    <img 
+                        src={lightboxImage} 
+                        alt="Enlarged view" 
+                        style={{ maxWidth: '90vw', maxHeight: '90vh', objectFit: 'contain' }} 
+                    />
+                </div>
             )}
 
-            {/* DETAILS SECTION (Split Grid) */}
-            <div className="row g-5">
-                
-                {/* Left Column: The Narrative */}
-                <div className="col-lg-8">
-                    {selectedProject.goal && (
-                        <div className="mb-5">
-                            <h3 className="fw-bold mb-3">The Goal</h3>
-                            <p style={{ lineHeight: '1.8' }}>{selectedProject.goal}</p>
-                        </div>
+            <div className="container py-5 text-white">
+                <div className="mb-4">
+                    <CloseDetailsBtn />
+                </div>
+
+                {/* HEADER SECTION */}
+                <div className="mb-5">
+                    <h1 className="display-4 fw-bold mb-3">{selectedProject.title}</h1>
+                    
+                    {selectedProject.description && (
+                        <p className="lead opacity-75 w-75">{selectedProject.description}</p>
                     )}
                     
-                    {selectedProject.features && (
-                        <div className="mb-5">
-                            <h3 className="fw-bold mb-3">Key Features</h3>
-                            {/* whiteSpace: 'pre-wrap' preserves your Airtable bullet points */}
-                            <p style={{ lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>{selectedProject.features}</p>
-                        </div>
-                    )}
-
-                    {/* Integrated the Metrics section here! */}
-                    {selectedProject.metrics && (
-                        <div className="mb-5">
-                            <h3 className="fw-bold mb-3">Impact & Metrics</h3>
-                            <p style={{ lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>{selectedProject.metrics}</p>
-                        </div>
+                    {(selectedProject.link || selectedProject.git) && (
+                        <div className="d-flex gap-3 mt-4">
+                            {selectedProject.link && (
+                                <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="btn btn-accent rounded-pill px-4">
+                                    Watch Video / Visit Site
+                                </a>
+                            )}
+                            {selectedProject.git && (
+                                <a href={selectedProject.git} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light rounded-pill px-4">
+                                    View Repository
+                                </a>
+                            )}            
+                        </div> 
                     )}
                 </div>
 
-                {/* Right Column: The Tech Stack */}
-                <div className="col-lg-4">
-                    {/* sticky-top makes the stack float nicely as they read the long text on the left */}
-                    <div className="glass-card p-4 sticky-top" style={{ top: '100px' }}>
-                        <h3 className="fw-bold mb-4">Tech Stack</h3>
-                        {renderCategory("Design & Creative", selectedProject.design)}
-                        {renderCategory("Programming & Scripting", selectedProject.programming)}
-                        {renderCategory("Databases & CMS", selectedProject.databases)}
-                        {renderCategory("Systems & Hardware", selectedProject.systems)}
+                {/* DYNAMIC MULTIMEDIA HANDLING */}
+                {selectedProject.gallery && selectedProject.gallery.length > 0 && (
+                    selectedProject.category === 'Video & Multimedia' ? (
+                        
+                        <div className="row g-4 mb-5">
+                            {selectedProject.gallery.map((image, index) => (
+                                <div className="col-12 col-md-6" key={image.id || index}>
+                                    <div 
+                                        className="w-100 rounded-4 shadow-sm d-flex justify-content-center align-items-center"
+                                        style={{ height: '350px', backgroundColor: 'rgba(0, 0, 0, 0.15)', overflow: 'hidden' }}
+                                    >
+                                        <img
+                                            src={image.url}
+                                            alt={`Gallery item ${index}`}
+                                            loading="lazy"
+                                            onClick={() => setLightboxImage(image.url)}
+                                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', cursor: 'zoom-in' }} 
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                    ) : (
+
+                        <Carousel className="mb-5 shadow-lg rounded-4 overflow-hidden glass-card border-0">
+                            {selectedProject.gallery.map((image, index) => (
+                                <Carousel.Item key={image.id || index}>
+                                    <div 
+                                        className="d-flex justify-content-center align-items-center w-100"
+                                        style={{ height: '500px', backgroundColor: 'rgba(0, 0, 0, 0.15)' }}
+                                    >
+                                        <img
+                                            className="d-block"
+                                            src={image.url}
+                                            alt={`Slide ${index}`}
+                                            loading="lazy"
+                                            onClick={() => setLightboxImage(image.url)}
+                                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain', cursor: 'zoom-in' }} 
+                                        />
+                                    </div>
+                                </Carousel.Item>
+                            ))}
+                        </Carousel>
+
+                    )
+                )}
+
+                {/* DETAILS SECTION */}
+                <div className="row g-5">
+                    <div className={hasTools ? "col-lg-8" : "col-12"}>
+                        {selectedProject.goal && (
+                            <div className="mb-5">
+                                <h3 className="fw-bold mb-3">The Goal</h3>
+                                <p style={{ lineHeight: '1.8' }}>{selectedProject.goal}</p>
+                            </div>
+                        )}
+                        
+                        {selectedProject.features && (
+                            <div className="mb-5 custom-markdown-styles">
+                                <h3 className="fw-bold mb-3">Key Features</h3>
+                                <ReactMarkdown>{selectedProject.features}</ReactMarkdown>
+                            </div>
+                        )}
+
+                        {selectedProject.metrics && (
+                            <div className="mb-5 custom-markdown-styles">
+                                <h3 className="fw-bold mb-3">Impact & Metrics</h3>
+                                <ReactMarkdown>{selectedProject.metrics}</ReactMarkdown>
+                            </div>
+                        )}
                     </div>
+
+                    {hasTools && (
+                        <div className="col-lg-4">
+                            <div className="glass-card p-4 sticky-top" style={{ top: '100px' }}>
+                                <h3 className="fw-bold mb-4">Tools</h3>
+                                {renderCategory("Design & Creative", selectedProject.design)}
+                                {renderCategory("Programming & Scripting", selectedProject.programming)}
+                                {renderCategory("Content & Data Management", selectedProject.databases)}
+                                {renderCategory("Systems & Hardware", selectedProject.systems)}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
