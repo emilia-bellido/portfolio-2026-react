@@ -1,9 +1,11 @@
 export default async function handler(req, res) {
     try {
-        // In a backend Node environment, we use process.env instead of import.meta.env
         const baseId = process.env.AIRTABLE_BASE_ID;
         const pat = process.env.AIRTABLE_PAT;
         
+        // Log to Vercel to confirm variables exist (true/false)
+        console.log("Environment Variables Check:", { hasBaseId: !!baseId, hasPat: !!pat });
+
         const url = `https://api.airtable.com/v0/${baseId}/Projects`;
 
         const response = await fetch(url, {
@@ -12,16 +14,19 @@ export default async function handler(req, res) {
             }
         });
 
+        const data = await response.json();
+
+        // If Airtable rejects the request, send the exact error to the screen
         if (!response.ok) {
-            throw new Error(`Airtable error: ${response.status}`);
+            console.error("Airtable API Error:", data);
+            return res.status(response.status).json({ error: "Airtable rejected the request", details: data });
         }
 
-        const data = await response.json();
-        
-        // Send the secure data back to your React frontend
-        res.status(200).json(data);
+        // If successful, send data
+        return res.status(200).json(data);
         
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch projects' });
+        console.error("Serverless Function Crash:", error);
+        return res.status(500).json({ error: 'Server crashed', message: error.message });
     }
 }
