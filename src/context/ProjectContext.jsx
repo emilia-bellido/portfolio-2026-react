@@ -21,12 +21,12 @@ export const ProjectProvider = ({children}) => {
                 }
 
                 // 2. If no cache exists, do the normal API call
-                const baseId = import.meta.env.VITE_AIRTABLE_BASE_ID;
+                const baseId = import.meta.env.AIRTABLE_BASE_ID;
                 const url = `https://api.airtable.com/v0/${baseId}/Projects`;
 
                 const response = await fetch(url, {
                     headers: {
-                    Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_PAT}`
+                    Authorization: `Bearer ${import.meta.env.AIRTABLE_PAT}`
                     }
                 });
 
