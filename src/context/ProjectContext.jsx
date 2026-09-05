@@ -10,26 +10,7 @@ export const ProjectProvider = ({children}) => {
         const getProjects = async () => {
            
             try {
-                // 1. Check if we already have the data saved in the browser
-                const cachedData = localStorage.getItem('cached_portfolio_projects');
-                
-                if (cachedData) {
-                    // If we do, parse it, set it, and STOP the function. No API call!
-                    setMyProjects(JSON.parse(cachedData));
-                    console.log("Loaded projects from local cache! API bypassed.");
-                    return; 
-                }
-
-                // 2. If no cache exists, do the normal API call
-                const baseId = import.meta.env.AIRTABLE_BASE_ID;
-                const url = `https://api.airtable.com/v0/${baseId}/Projects`;
-
-                const response = await fetch(url, {
-                    headers: {
-                    Authorization: `Bearer ${import.meta.env.AIRTABLE_PAT}`
-                    }
-                });
-
+               const response = await fetch('/api/projects');
                 const data = await response.json();
                 console.log("Fetched fresh from Airtable:", data);
 
