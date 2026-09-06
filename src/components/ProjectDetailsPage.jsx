@@ -141,12 +141,12 @@ const ProjectDetailsPage = () => {
                 )}
 
                 {/* DETAILS SECTION */}
-                <div className="row g-5">
-                    <div className={hasTools ? "col-lg-8" : "col-12"}>
+                <div className="row g-5 ">
+                    <div className={`glass-project-page p-5 ${hasTools ? "col-lg-8" : "col-12"}`}>                        
                         {selectedProject.goal && (
                             <div className="mb-5">
                                 <h3 className="fw-bold mb-3">The Goal</h3>
-                                <p style={{ lineHeight: '1.8' }}>{selectedProject.goal}</p>
+                                <p>{selectedProject.goal}</p>
                             </div>
                         )}
                         

@@ -10,7 +10,6 @@
 
 
 body {
-  background-color: var(--bg-main);
   background-image: url("assets/hero.jpg");
 
   background-size: cover;        /* Forces image to cover the entire screen */
@@ -111,4 +110,14 @@ h1, h2, h3, h4, h5, h6 {
 .badge-highlight {
   background-color: var(--highlight);
   color: #FFFFFF;
+}
+
+
+.glass-project-page {
+  background-color: #0000005c;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  transition: all 0.3s ease-in-out;
 }
