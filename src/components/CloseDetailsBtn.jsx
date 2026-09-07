@@ -1,12 +1,11 @@
 import CloseButton from 'react-bootstrap/CloseButton';
-import { useNavigate } from "react-router-dom"; // 1. Use navigate instead of Link
-
+import { useNavigate } from "react-router-dom";
 function CloseDetailsBtn() {
-  const navigate = useNavigate(); // 2. Initialize the hook
+  const navigate = useNavigate(); 
 
   return (
     <CloseButton 
-      onClick={() => navigate('/')} // 3. Trigger the route change on click
+      onClick={() => navigate('/')} 
       aria-label="Close project details" className="close-btn"
     />
   );

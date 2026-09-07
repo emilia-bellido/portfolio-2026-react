@@ -1,21 +1,10 @@
-#nav-style{
-  background-color: rgb(255 255 255 / 50%);
-  color: white;
-  padding: 20px;
-  margin: 20px;
-  
-}
-
-#nav-style .nav-link{
-  color: white !important;
-}
-
 #contact-form input{
     background-color: #ffffff00 !important;
     backdrop-filter: blur(6px);
     border: 0px;
     border-bottom: 4px solid var(--border-color);
     color: white;
+
 }
 
 #contact-form input:focus{
@@ -42,6 +31,7 @@
 
 
 
+
 /*Icons on Footer*/
 
 .icon-footer{
@@ -51,21 +41,4 @@
 /*Close Button on project*/
 .close-btn{
   background-color: white;
-}
-
-#hero-pic {
-  /* 1. Square Crop & Sizing */
-  width: 100%;
-  max-width: 320px; 
-  aspect-ratio: 1 / 1; 
-  object-fit: cover;
-  
-  /* 2. Centering in the column */
-  display: block;
-  margin: 0 auto;
-  
-  /* 3. Glass Border Effect */
-  border-radius: 40px;
-  border: 6px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
 }

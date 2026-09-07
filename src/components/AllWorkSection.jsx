@@ -32,7 +32,7 @@ const AllWorkSection = () => {
     
   return(
     <div id="projects">
-      <p className="fw-medium fs-5 mb-3">What would you like to see?</p>
+      <p className="fw-medium fs-5 mb-3">Pick a direction to explore</p>
 
       <div className="d-flex flex-wrap gap-2">
         <Button onClick={categoriesBtn} variant="outline-light" className="rounded-pill px-4 py-2 fw-medium">

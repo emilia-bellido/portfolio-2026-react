@@ -10,17 +10,17 @@ import profilePic from '../assets/emilia_photo.JPG';
 
 const Hero = () => {
   return (
-    <Container className="px-0 mb-5">
+    <Container className="mb-5">
       <div className="text-start">
         <p className="fw-bold text-muted-custom">Creative Technologist</p>
         <h1 className="fw-bold mb-3">Hi, I'm Emilia.</h1>
-        <p className="fs-5 mb-4 text-center">
-          My goal is <strong>SIMPLE</strong>: help your brand connect with the world.  <br>
-          From building a website to editing a promotional video<br>
-          I blend technical logic with digital storytelling to help purpose-driven<br>
-          organizations share their vision.
+        <div className="d-flex flex-wrap text-start">
+          <p className="m-1">I want to <strong>HELP</strong> your brand connect with the world.</p>
+          <p className="m-1">From building a website to editing a promotional video. </p>
+          <p className="m-1">I blend technical logic with digital storytelling to help purpose-driven
+          organizations share their vision.</p>
   
-        </p>
+        </div>
       </div>
      
     </Container>

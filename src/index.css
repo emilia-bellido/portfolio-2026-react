@@ -10,24 +10,43 @@
 
 
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background-image: url("assets/bg.jpg");
-
-  background-size: cover;        /* Forces image to cover the entire screen */
-  background-position: center;   /* Centers the image properly */
-  background-attachment: fixed;  /* Locks the image so it doesn't scroll away */
+  background-size: cover;        
+  background-position: center;   
+  background-attachment: fixed;  
   background-repeat: no-repeat;
   color: white;
   font-family: "Host Grotesk", sans-serif;
   margin: 0;
-  padding: 20px;
+  padding: 0;
   transition: all 0.3s ease-in-out;
+}
+
+@keyframes fade-in {
+    from{
+        opacity : 0;
+
+    }
+
+    to{
+        opacity: 1;
+    }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Merriweather Sans", sans-serif;
   color: white;
   font-weight: 700;
+}
+
+section{
+  animation: fade-in 2s ease-in forwards;
 }
 
 
@@ -121,4 +140,78 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid var(--border-color);
   border-radius: 16px;
   transition: all 0.3s ease-in-out;
+}
+
+button.navbar-toggler {
+  border: none;
+  color: white;
+}
+
+/* Optional: Remove the ugly focus ring when clicked */
+button.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon{
+  color: white !important;
+}
+
+#nav-style .nav-link {
+  color: white !important;
+}
+
+#nav-style .nav-link:hover {
+  border: none;
+  color: var(--accent) !important;
+  border-bottom: 3px solid var(--accent);
+}
+
+
+#nav-style {
+  background-color: #d3d2cf5e;
+  backdrop-filter: blur(37px);
+  -webkit-backdrop-filter: blur(37px); 
+}
+
+
+@media screen and (max-width: 992px) {
+  #nav-style {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    justify-content:flex-end; 
+  }
+
+  .navbar > .container{
+    justify-content: flex-end !important;
+  }
+
+  
+  #basic-navbar-nav {
+    position: absolute;
+    top: 100%;       
+    right: 19px;        
+    width: 200px;
+
+   background-color: #d3d2cf5e;
+    backdrop-filter: blur(37px);
+    -webkit-backdrop-filter: blur(37px);
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 15px;
+    z-index: 1050;   
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.form-design{
+    background-color: #000000b0;
+    backdrop-filter: blur(66px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 0px solid var(--border-color);
+    border-radius: 16px;
+    transition: all 0.3s ease-in-out;
 }
