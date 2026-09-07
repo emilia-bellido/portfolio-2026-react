@@ -20,7 +20,7 @@ export default function ContactForm() {
   };
 
   return (
-    <Form id="contact-form" className="m-5 my-3"    onSubmit={onSubmit}>
+    <Form id="contact-form" className="m-5 pb-5"    onSubmit={onSubmit}>
       <Form.Control name="botcheck" type="checkbox" style={{ display: 'none' }}/>
       <div className="row">
 
@@ -46,7 +46,7 @@ export default function ContactForm() {
         <Form.Control name="message" as="textarea" 
       rows={4} placeholder="Message" />
       </Form.Group>
-      <Button variant="outline-light" className="rounded-pill px-4 py-2 fw-medium" type="submit">
+      <Button variant="outline-light" className="rounded-pill px-4  fw-medium" type="submit">
         Submit
       </Button>
       <p>{result}</p>

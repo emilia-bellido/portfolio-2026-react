@@ -20,23 +20,29 @@ function App() {
   return (
     <>
     
-        <NavBar className="container"/>
+      <header className = "container p-3">
+        <NavBar />
+      </header>
+      
    
       
 
-      <section className = "container" id="about">
+      <section className = "container p-3" id="about">
          <Hero />
       </section>
 
-     <section id="all-works" className="container py-5">
+     <section id="all-works" className="container p-3">
         <AllWorkSection />
       </section>
 
-      <section id="contact" className="container col-md-8">
-      <h5 className="text-center">Let's Work Together!</h5>
+      <section className="p-3 d-flex align-items-center justify-content-center">
+        <div id="contact" className="form-design m-3 d-flex align-items-center justify-content-center flex-column">
+          <h5 className="text-center pt-5">Let's Work Together!</h5>
 
-      <ContactForm />
-      </section> 
+          <ContactForm />
+        </div>
+      </section>
+      
       <Footer />
       
       
