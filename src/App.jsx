@@ -32,10 +32,10 @@ function App() {
         <AllWorkSection />
       </section>
 
-      <section id="contact" className="container col-md-8">
-      <h5 className="text-center">Let's Work Together!</h5>
+      <section id="contact" className="container col-md-8 glass-project-page">
+        <h5 className="text-center">Let's Work Together!</h5>
 
-      <ContactForm />
+        <ContactForm />
       </section> 
       <Footer />
       
