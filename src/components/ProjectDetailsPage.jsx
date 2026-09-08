@@ -70,7 +70,7 @@ const ProjectDetailsPage = () => {
                 </div>
             )}
 
-            <div className="container py-5 text-white">
+            <div className="container p-3 text-white">
                 
                 {/* Pass the nextProjectId to your button component */}
                 <div className="mb-5">
@@ -166,7 +166,7 @@ const ProjectDetailsPage = () => {
                 )}
 
                 <div className="mb-3">
-                    <div className="glass-project-page p-2 col-12">                        
+                    <div className="glass-project-page p-3 col-12">                        
                         {selectedProject.goal && (
                             <div className="mb-5">
                                 <h3 className="fw-bold mb-3">The Goal</h3>
