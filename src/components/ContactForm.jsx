@@ -6,7 +6,7 @@ import { FaRegCopy } from "react-icons/fa6";
 import Container from 'react-bootstrap/Container';
 
 export default function ContactForm() {
-  const [status, setStatus] = useState(null); // { type: "success" | "error", message: string }
+  const [status, setStatus] = useState(null); 
   const [submitting, setSubmitting] = useState(false);
   const [copied, setCopied] = useState(false);
 
