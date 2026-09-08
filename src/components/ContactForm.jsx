@@ -1,9 +1,15 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { FaRegCopy } from "react-icons/fa6";
+import Container from  'react-bootstrap/Container';
+
 
 export default function ContactForm() {
   const [result, setResult] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  const email = "emiliaf.bellido@gmail.com";
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -17,6 +23,15 @@ export default function ContactForm() {
 
     const data = await response.json();
     setResult(data.success ? "Success!" : "Error");
+  };
+  
+  const handleCopy = async () =>{
+    try{
+      await navigator.clipboard.writeText(email);
+      setCopied(true);
+    }catch(error){
+      console.error("Failed to copy email:", error);
+    }
   };
 
   return (
@@ -46,10 +61,17 @@ export default function ContactForm() {
         <Form.Control name="message" as="textarea" 
       rows={4} placeholder="Message" />
       </Form.Group>
-      <Button variant="outline-light" className="rounded-pill px-4  fw-medium" type="submit">
-        Submit
-      </Button>
-      <p>{result}</p>
+      <Container className="d-flex flex-wrap">
+          <Button variant="outline-light" className="rounded-pill px-4 me-3 fw-medium" type="submit">
+          Submit
+        </Button>
+        <p>{result}</p>
+        <Button onClick={handleCopy} variant="outline-light" className="rounded-pill px-4 fw-medium" type="submit">
+          <FaRegCopy className="me-2"/>
+          {copied ? "Copied!" : "Copy Email"}
+        </Button>
+      </Container>
+      
     </Form>
   );
 }

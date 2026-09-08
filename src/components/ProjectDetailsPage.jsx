@@ -9,10 +9,19 @@ const ProjectDetailsPage = () => {
     const { myProjects } = useContext(ProjectContext);
     const { projectId } = useParams();
     
-    // NEW: State to track which image is currently clicked/open
     const [lightboxImage, setLightboxImage] = useState(null);
 
+    // Find the current project
     const selectedProject = myProjects.find((project) => project.id === projectId);
+    
+    // Find the index of the current project
+    const currentIndex = myProjects.findIndex((project) => project.id === projectId);
+    
+    // Calculate the next project index (loops back to 0 if at the end of the array)
+    const nextIndex = (currentIndex + 1) % myProjects.length;
+    
+    // Get the ID of the next project
+    const nextProjectId = myProjects.length > 0 ? myProjects[nextIndex].id : null;
 
     if (!selectedProject) {
         return <h2 className="text-center mt-5 text-white">Project Not Found</h2>;
@@ -42,17 +51,15 @@ const ProjectDetailsPage = () => {
 
     return(
         <>
-            {/* NEW: THE LIGHTBOX OVERLAY */}
-            {/* If an image is clicked, this fullscreen div appears. Clicking it sets state back to null (closes it) */}
             {lightboxImage && (
                 <div 
                     onClick={() => setLightboxImage(null)}
                     style={{
                         position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
                         backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                        zIndex: 9999, // Ensures it sits on top of everything, including navbars
+                        zIndex: 9999,
                         display: 'flex', justifyContent: 'center', alignItems: 'center',
-                        cursor: 'zoom-out' // Shows a minus magnifying glass to indicate clicking closes it
+                        cursor: 'zoom-out'
                     }}
                 >
                     <img 
@@ -64,35 +71,53 @@ const ProjectDetailsPage = () => {
             )}
 
             <div className="container py-5 text-white">
-                <div className="mb-4">
-                    <CloseDetailsBtn />
-                </div>
-
-                {/* HEADER SECTION */}
+                
+                {/* Pass the nextProjectId to your button component */}
                 <div className="mb-5">
-                    <h1 className="display-4 fw-bold mb-3">{selectedProject.title}</h1>
-                    
-                    {selectedProject.description && (
-                        <p className="lead opacity-75 w-75">{selectedProject.description}</p>
-                    )}
-                    
-                    {(selectedProject.link || selectedProject.git) && (
-                        <div className="d-flex gap-3 mt-4">
-                            {selectedProject.link && (
-                                <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="btn btn-accent rounded-pill px-4">
-                                    Watch Video / Visit Site
-                                </a>
-                            )}
-                            {selectedProject.git && (
-                                <a href={selectedProject.git} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light rounded-pill px-4">
-                                    View Repository
-                                </a>
-                            )}            
-                        </div> 
+                    <CloseDetailsBtn nextProjectId={nextProjectId} />
+                </div>
+
+
+                <div className="d-flex flex-column flex-md-row justify-content-between gap-5 mb-5">
+                    <div className="d-flex flex-column">
+                        <h1 className="display-4 fw-bold mb-3">{selectedProject.title}</h1>
+                        {selectedProject.description && (
+                            <p className="lead opacity-75 w-75">{selectedProject.description}</p>
+                        )}
+
+                        {(selectedProject.link || selectedProject.git) && (
+                            <div className="d-flex gap-3 mt-4">
+                                {selectedProject.link && (
+                                    <a href={selectedProject.link} target="_blank" rel="noopener noreferrer" className="btn btn-accent rounded-pill px-4">
+                                        Watch Video / Visit Site
+                                    </a>
+                                )}
+                                {selectedProject.git && (
+                                    <a href={selectedProject.git} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light rounded-pill px-4">
+                                        View Repository
+                                    </a>
+                                )}            
+                            </div> 
+                        )}
+                    </div>
+                
+                    {hasTools && (
+                    <div>
+                        {/* Note: I fixed the "min-width" syntax here to minWidth for React */}
+                        <div className="glass-card p-4" style={{ minWidth: '363px'}}>
+                            <h3 className="fw-bold mb-4">Tools</h3>
+                            <div className="d-flex flex-column">
+                                {renderCategory("Design & Creative", selectedProject.design)}
+                                {renderCategory("Programming & Scripting", selectedProject.programming)}
+                                {renderCategory("Content & Data Management", selectedProject.databases)}
+                                {renderCategory("Systems & Hardware", selectedProject.systems)}
+                            </div>
+                            
+                        </div>
+                    </div>
                     )}
                 </div>
 
-                {/* DYNAMIC MULTIMEDIA HANDLING */}
                 {selectedProject.gallery && selectedProject.gallery.length > 0 && (
                     selectedProject.category === 'Video & Multimedia' ? (
                         
@@ -140,9 +165,8 @@ const ProjectDetailsPage = () => {
                     )
                 )}
 
-                {/* DETAILS SECTION */}
-                <div className="row g-5 ">
-                    <div className={`glass-project-page p-5 ${hasTools ? "col-lg-8" : "col-12"}`}>                        
+                <div className="mb-3">
+                    <div className="glass-project-page p-2 col-12">                        
                         {selectedProject.goal && (
                             <div className="mb-5">
                                 <h3 className="fw-bold mb-3">The Goal</h3>
@@ -164,18 +188,6 @@ const ProjectDetailsPage = () => {
                             </div>
                         )}
                     </div>
-
-                    {hasTools && (
-                        <div className="col-lg-4">
-                            <div className="glass-card p-4 sticky-top" style={{ top: '100px' }}>
-                                <h3 className="fw-bold mb-4">Tools</h3>
-                                {renderCategory("Design & Creative", selectedProject.design)}
-                                {renderCategory("Programming & Scripting", selectedProject.programming)}
-                                {renderCategory("Content & Data Management", selectedProject.databases)}
-                                {renderCategory("Systems & Hardware", selectedProject.systems)}
-                            </div>
-                        </div>
-                    )}
                 </div>
             </div>
         </>
