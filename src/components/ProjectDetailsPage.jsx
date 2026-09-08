@@ -45,7 +45,8 @@ const ProjectDetailsPage = () => {
     };
 
     const hasTools = (selectedProject.design && selectedProject.design.length > 0) || 
-                     (selectedProject.programming && selectedProject.programming.length > 0) || 
+                     (selectedProject.programming && selectedProject.programming.length > 0) ||
+                     (selectedProject.web && selectedProject.web.length > 0) || 
                      (selectedProject.databases && selectedProject.databases.length > 0) || 
                      (selectedProject.systems && selectedProject.systems.length > 0);
 
@@ -109,6 +110,7 @@ const ProjectDetailsPage = () => {
                             <div className="d-flex flex-column">
                                 {renderCategory("Design & Creative", selectedProject.design)}
                                 {renderCategory("Programming & Scripting", selectedProject.programming)}
+                                {renderCategory("Frontend & Web Frameworks", selectedProject.web)}
                                 {renderCategory("Content & Data Management", selectedProject.databases)}
                                 {renderCategory("Systems & Hardware", selectedProject.systems)}
                             </div>
@@ -176,7 +178,7 @@ const ProjectDetailsPage = () => {
                         
                         {selectedProject.features && (
                             <div className="mb-5 custom-markdown-styles">
-                                <h3 className="fw-bold mb-3">Key Features</h3>
+                                <h3 className="fw-bold fs-1 mb-3">Key Features</h3>
                                 <ReactMarkdown>{selectedProject.features}</ReactMarkdown>
                             </div>
                         )}

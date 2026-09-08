@@ -27,7 +27,8 @@ export const ProjectProvider = ({children}) => {
                     git: project.fields["Repository"],
                     design: project.fields["Design & Creative Tools"],
                     programming: project.fields["Programming & Scripting"],
-                    databases: project.fields["Databses & Content Systems"],
+                    web: project.fields["Frontend & Web Frameworks"],
+                    databases: project.fields["Data & Content Systems"],
                     systems: project.fields["Systems, Hardware & Version Control"],
                     gallery: project.fields["Gallery"] || [],
                 }));
