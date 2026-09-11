@@ -3,7 +3,7 @@ const Footer = () => {
          <footer>
             {/* FOOTER */}
             <div className="footer d-flex justify-content-center align-items-center">
-                <p className="fw-3 fs-4 py-3 m-0"> &copy; 2026 Portoflio EBC</p>
+                <p className="fw-3 fs-4 py-3 m-0"> &copy; 2026 Portfolio EBC</p>
 
                 {/**Linkendin Icon */}
                 <a href="https://www.linkedin.com/in/emiliabellido" target="_blank" className="p-3">
