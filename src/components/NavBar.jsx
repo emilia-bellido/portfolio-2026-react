@@ -15,7 +15,7 @@ const NavBar = () => {
                     <Nav className="mx-auto text-center mt-3 mt-lg-0">
                         <Nav.Link href="#all-works">Projects</Nav.Link>
                         <Nav.Link href="#contact">Contact</Nav.Link>
-                        <Nav.Link href="/Emilia Bellido Resume.pdf" download="Emilia_Bellido_Resume.pdf">
+                        <Nav.Link href="/Emilia Bellido Resume .pdf" download="Emilia_Bellido_Resume.pdf">
                             <i id="icon-nav" className="bi bi-download pe-2"></i>Resume
                         </Nav.Link>
                     </Nav>
