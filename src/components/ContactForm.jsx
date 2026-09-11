@@ -108,7 +108,7 @@ export default function ContactForm() {
           className="rounded-pill px-4 fw-medium"
           type="button"
         >
-          <FaRegCopy className="me-2" />
+          <FaRegCopy className="mx-2 me-2" />
           {copied ? "Copied!" : "Copy Email"}
         </Button>
       </Container>
