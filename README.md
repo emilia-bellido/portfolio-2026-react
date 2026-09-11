@@ -2,8 +2,6 @@
 
 A responsive, dynamic digital portfolio built with React and Vite. This application bridges front-end user experience with secure back-end data management, utilizing an Airtable base as a headless CMS to dynamically generate project cards.
 
-**Live Demo:** [Insert your Vercel URL here]
-
 ## 🛠 Tech Stack
 *   **Front-End:** React, Vite, JavaScript, HTML/CSS
 *   **UI Framework:** React-Bootstrap, CSS Glassmorphism
