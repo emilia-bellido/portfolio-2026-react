@@ -1,16 +1,18 @@
-# React + Vite
+# Emilia Francisca Bellido - Digital Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, dynamic digital portfolio built with React and Vite. This application bridges front-end user experience with secure back-end data management, utilizing an Airtable base as a headless CMS to dynamically generate project cards.
 
-Currently, two official plugins are available:
+**Live Demo:** [Insert your Vercel URL here]
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Tech Stack
+*   **Front-End:** React, Vite, JavaScript, HTML/CSS
+*   **UI Framework:** React-Bootstrap, CSS Glassmorphism
+*   **Back-End/API:** Vercel Serverless Functions (Node.js)
+*   **Database/CMS:** Airtable API
+*   **Deployment & Hosting:** Vercel
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Key Features
+*   **Dynamic Data Fetching:** Project details, links, and tags are pulled in real-time from an Airtable database, allowing for content updates without redeploying the site.
+*   **Secure API Routing:** Airtable Personal Access Tokens and Base IDs are protected using Vercel Serverless Functions (`/api/projects.js`), ensuring zero credential exposure on the client side.
+*   **Responsive UX/UI:** Fully responsive layout utilizing Bootstrap's grid system, custom glassmorphism borders, and mobile-first design principles.
+*   **Static Asset Management:** Direct resume downloading handled via Vite's public directory routing.
