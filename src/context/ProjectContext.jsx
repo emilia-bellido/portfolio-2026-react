@@ -2,17 +2,34 @@ import { useState, useEffect, createContext } from 'react';
 
 export const ProjectContext = createContext();
 
-export const ProjectProvider = ({children}) => {
-    
-    const [myProjects, setMyProjects] = useState([]);
+const CACHE_KEY = 'cached_portfolio_projects';
+const CACHE_TIME_KEY = 'cached_portfolio_projects_timestamp';
+const CACHE_TTL = 1000 * 60 * 60 * 24 * 14; // 2 weeks
+
+export const ProjectProvider = ({ children }) => {
+    const [myProjects, setMyProjects] = useState(() => {
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            return cached ? JSON.parse(cached) : [];
+        } catch {
+            return [];
+        }
+    });
 
     useEffect(() => {
+        const cachedTime = Number(localStorage.getItem(CACHE_TIME_KEY) || 0);
+        const isFresh = Date.now() - cachedTime < CACHE_TTL;
+
+        // Cache exists and isn't stale -> skip the network call entirely
+        if (myProjects.length > 0 && isFresh) {
+            console.log("Using cached projects, skipping Airtable call");
+            return;
+        }
+
         const getProjects = async () => {
-           
             try {
-               const response = await fetch('/api/project.js');
+                const response = await fetch('/api/project.js');
                 const data = await response.json();
-                console.log("Fetched fresh from Airtable:", data);
 
                 const formattedData = data.records.map((project) => ({
                     id: project.fields["Project ID"],
@@ -33,22 +50,17 @@ export const ProjectProvider = ({children}) => {
                     gallery: project.fields["Gallery"] || [],
                 }));
 
-                const selectedProjects = formattedData.filter(project => project.featured === true);
+                const selectedProjects = formattedData.filter(p => p.featured === true);
 
-
-                // 3. Save the newly formatted data to the browser for next time
-                localStorage.setItem('cached_portfolio_projects', JSON.stringify(selectedProjects));
-                
+                localStorage.setItem(CACHE_KEY, JSON.stringify(selectedProjects));
+                localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
                 setMyProjects(selectedProjects);
-                
-            }
-            catch(error){
+            } catch (error) {
                 console.error("Error fetching data: ", error);
-            };
+            }
         };
 
         getProjects();
-
     }, []);
 
     return (
