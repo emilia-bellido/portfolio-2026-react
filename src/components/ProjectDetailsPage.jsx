@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useParams } from "react-router"; 
+import { useParams } from "react-router-dom"; 
 import Carousel from 'react-bootstrap/Carousel'; 
 import { ProjectContext } from '../context/ProjectContext';
 import CloseDetailsBtn from './CloseDetailsBtn';
