@@ -30,6 +30,8 @@ export default function ContactForm() {
 
       const data = await response.json();
 
+      console.log("Web3Forms response:", data);
+
       if (data.success) {
         setStatus({ type: "success", message: "Thanks! Your message has been sent." });
         event.target.reset();
