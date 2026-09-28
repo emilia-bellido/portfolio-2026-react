@@ -9,11 +9,20 @@ export default async function handler(req, res) {
 
         const response = await fetch("https://api.web3forms.com/submit", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
             body: JSON.stringify(formData)
         });
 
-        const data = await response.json();
+        const rawText = await response.text();
+        console.log("Web3Forms status:", response.status);
+        console.log("Web3Forms raw response:", rawText);
+
+        let data;
+        try {
+            data = JSON.parse(rawText);
+        } catch {
+            return res.status(502).json({ error: "Web3Forms returned non-JSON", raw: rawText.slice(0, 500) });
+        }
 
         if (!response.ok) {
             return res.status(response.status).json({ error: "Web3Forms rejected the request", details: data });
