@@ -6,7 +6,7 @@ import { ProjectContext } from '../context/ProjectContext';
 import { useContext } from 'react';
 
 // 1. Import the image file directly
-import profilePic from '../assets/emilia_photo.JPG';
+import profilePic from '../assets/about_1.jpg';
 
 const Hero = () => {
   return (
@@ -27,4 +27,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;3
+export default Hero;
