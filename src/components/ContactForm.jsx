@@ -19,12 +19,11 @@ export default function ContactForm() {
 
     try {
       const formData = new FormData(event.target);
-      const payload = Object.fromEntries(formData.entries());
+      formData.append("access_key", import.meta.env.WEB3FORMS_KEY);
 
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body: formData
       });
 
       const data = await response.json();
@@ -47,7 +46,7 @@ export default function ContactForm() {
     } finally {
       setSubmitting(false);
     }
-};
+  };
 
   const handleCopy = async () => {
     try {
