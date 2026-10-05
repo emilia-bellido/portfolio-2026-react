@@ -94,7 +94,7 @@ const ProjectDetailsPage = () => {
                                     </a>
                                 )}
                                 {selectedProject.git && (
-                                    <a href={selectedProject.git} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light rounded-pill px-4">
+                                    <a href={selectedProject.git} target="_blank" rel="noopener noreferrer" className="btn btn-outline-light rounded-pill px-4 d-flex align-items-center">
                                         View Repository
                                     </a>
                                 )}            
