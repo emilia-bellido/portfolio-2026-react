@@ -178,7 +178,7 @@ const ProjectDetailsPage = () => {
                         
                         {selectedProject.features && (
                             <div className="mb-5 custom-markdown-styles">
-                                <h3 className="fw-bold fs-1 mb-3">Key Features</h3>
+                                <h3 className="fw-bold mb-3">Key Features</h3>
                                 <ReactMarkdown>{selectedProject.features}</ReactMarkdown>
                             </div>
                         )}
