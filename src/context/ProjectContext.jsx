@@ -28,7 +28,7 @@ export const ProjectProvider = ({ children }) => {
 
         const getProjects = async () => {
             try {
-                const response = await fetch('/api/project.js');
+                const response = await fetch('/api/project');
                 const data = await response.json();
 
                 const formattedData = data.records.map((project) => ({
@@ -52,7 +52,7 @@ export const ProjectProvider = ({ children }) => {
 
                 const selectedProjects = formattedData.filter(p => p.featured === true);
 
-                localStorage.setItem(CACHE_KEY, JSON.stringify(selectedProjects));
+              
                 localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
                 setMyProjects(selectedProjects);
             } catch (error) {
