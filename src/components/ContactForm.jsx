@@ -18,15 +18,19 @@ export default function ContactForm() {
     setStatus(null);
 
     try {
-      const formData = new FormData(event.target);
-      formData.append("access_key", import.meta.env.WEB3FORMS_KEY);
+    
 
+
+       const formData = new FormData(event.target);
+    formData.append("access_key", "7c9cb352-1fb4-43d0-8163-69e069171f51");
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData
       });
 
       const data = await response.json();
+
+      console.log("Web3Forms response:", data);
 
       if (data.success) {
         setStatus({ type: "success", message: "Thanks! Your message has been sent." });
