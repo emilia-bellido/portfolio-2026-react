@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "node scripts/fetch-projects.mjs --if-missing && vite",
+    "build": "node scripts/fetch-projects.mjs && vite build",
+    "refresh-data": "node scripts/fetch-projects.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

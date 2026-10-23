@@ -25,3 +25,7 @@ dist-ssr
 *.env
 .vercel
 .env*
+
+# Generated from Airtable at build time (scripts/fetch-projects.mjs)
+src/data/projects.json
+public/projects/
