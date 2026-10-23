@@ -2,12 +2,6 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-import { ProjectContext } from '../context/ProjectContext';
-import { useContext } from 'react';
-
-// 1. Import the image file directly
-import profilePic from '../assets/about_1.jpg';
-
 const Hero = () => {
   return (
     <Container className="mb-5">

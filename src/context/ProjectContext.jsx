@@ -4,7 +4,8 @@ export const ProjectContext = createContext();
 
 const CACHE_KEY = 'cached_portfolio_projects';
 const CACHE_TIME_KEY = 'cached_portfolio_projects_timestamp';
-const CACHE_TTL = 1000 * 60 * 60 * 24 * 14; // 2 weeks
+// Airtable attachment URLs expire after a couple of hours, so keep this short
+const CACHE_TTL = 1000 * 60 * 30; // 30 minutes
 
 export const ProjectProvider = ({ children }) => {
     const [myProjects, setMyProjects] = useState(() => {
@@ -34,7 +35,7 @@ export const ProjectProvider = ({ children }) => {
                 const formattedData = data.records.map((project) => ({
                     id: project.fields["Project ID"],
                     title: project.fields["Title"],
-                    image: project.fields["Main Image"]?.[0]?.url,
+                    image: project.fields["Main Image"]?.[0]?.thumbnails?.large?.url ?? project.fields["Main Image"]?.[0]?.url,
                     category: project.fields["Category"],
                     featured: project.fields["Featured"],
                     description: project.fields["Description"],
@@ -53,6 +54,7 @@ export const ProjectProvider = ({ children }) => {
                 const selectedProjects = formattedData.filter(p => p.featured === true);
 
               
+                localStorage.setItem(CACHE_KEY, JSON.stringify(selectedProjects));
                 localStorage.setItem(CACHE_TIME_KEY, String(Date.now()));
                 setMyProjects(selectedProjects);
             } catch (error) {
