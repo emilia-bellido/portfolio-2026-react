@@ -24,7 +24,7 @@ function App() {
    
       
 
-      <section className = "container p-3" id="about">
+      <section className = "container" id="about">
          <Hero />
       </section>
 
